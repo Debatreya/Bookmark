@@ -1,6 +1,6 @@
 // Component Impoprts
 import App from './App.jsx'
-import store from './Redux/store.js';
+import store from './redux/store.js';
 
 // CSS imports
 import './index.css'
