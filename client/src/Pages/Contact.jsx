@@ -1,6 +1,6 @@
 import { useState } from "react";
 import HomeLayout from "../Layouts/HomeLayout";
-import { isEmail } from "../Helpers/regexMatcher";
+import { isEmail } from "../helpers/regexMatcher";
 import axiosInstance from '../helpers/axiosinstance';
 import { toast, Toaster } from "react-hot-toast";
 
