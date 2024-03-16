@@ -26,6 +26,10 @@ app.use(cors({
 app.use(cookieParser());
 
 // routes test
+app.get('/', (req, res) => {
+    return res.send('Hello From Bookmark Server');
+})
+
 app.use('/ping', function(req, res){
     res.send('Pong');
 })

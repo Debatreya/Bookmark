@@ -1,5 +1,5 @@
 import User from "../models/user.model.js";
-import { razorpay } from "../server.js";
+import { razorpay } from "../index.js";
 import AppError from "../utils/error.util.js";
 import crypto from 'crypto'
 
