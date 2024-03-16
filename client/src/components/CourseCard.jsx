@@ -8,7 +8,9 @@ export default function CourseCard({data}){
     const navigate = useNavigate();
     const handleDelete = async (e) => {
         e.stopPropagation();
-        const res = axiosInstance.delete("youtube/playlist", { params: { url: data.playlist_url } }, { withCredentials: true });
+        const email = JSON.parse(localStorage.getItem("data")).email;
+        console.log(email);
+        const res = axiosInstance.delete("youtube/playlist", { params: { url: data.playlist_url, email: email } }, { withCredentials: true });
         toast.promise(res, {
             loading: "Deleting...",
             success: "Deleted Successfully",

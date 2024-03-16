@@ -3,15 +3,15 @@ import Scrapped from '../models/youtube.model.js';
 import usetube from 'usetube'
 
 async function createPlaylists(req, res) {
-    const {email} = req.user;
-    const url = req.body.url.trim();
+    // const {email} = req.user;
+    const {email, url} = req.body;
     // Check if it is a video URL or a playlist URL
     if (url.includes('watch?v=')) {
         return createVideo(url, email, res);
     }
     // If it is a playlist URL
     const playlist_url = url;
-    let playlist_title = req.body.title.trim();
+    let playlist_title = req.body.title;
     // Check if the playlist exists
     const user = await Scrapped.findOne({email});
     if(user){
@@ -205,7 +205,8 @@ const createVideo = async (videoUrl, email, res) => {
 }
 
 const getPlaylist = async (req, res) => {
-    const { email } = req.user;
+    // const { email } = req.user;
+    const email = req.query.email;
     try {
         // Check if email exists
         const user = await Scrapped.findOne({ email });
@@ -225,7 +226,8 @@ const getPlaylist = async (req, res) => {
 }
 const deletePlaylist = async (req, res) => {
     console.log("In delete Controller");
-    const { email } = req.user;
+    // const { email } = req.user;
+    const email = req.query.email
     const url = req.query.url
     // const { url } = req.body;
     console.log(url);
@@ -290,9 +292,9 @@ const renamePlaylistTitle = async (req, res) => {
 }
 
 const markProgress = async (req, res) => {
-    const { email } = req.user;
-    const { id, videoId } = req.body;
-    console.log(id, videoId);
+    // const { email } = req.user;
+    const { id, videoId, email } = req.body;
+    console.log(id, videoId, email);
     
     try {
         const user = await Scrapped.findOne({email});
@@ -319,7 +321,8 @@ const markProgress = async (req, res) => {
 }
 
 const getPlaylistProgress = async (req, res) => {
-    const { email } = req.user;
+    // const { email } = req.user;
+    const email = req.query.email;
     const id = req.query.id;
     try {
         const user = await Scrapped.findOne({email});
@@ -341,7 +344,8 @@ const getPlaylistProgress = async (req, res) => {
 } 
 
 const getVideoProgress = async (req, res) => {
-    const { email } = req.user;
+    // const { email } = req.user;
+    const email = req.query.email
     const { id, videoId } = req.query;
     try {
         const user = await Scrapped.findOne({email});

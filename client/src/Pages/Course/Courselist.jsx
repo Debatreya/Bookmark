@@ -23,7 +23,15 @@ function GetCourse(){
     function createPlaylist(e){
         e.preventDefault();
         console.log(playlist);
-        axiosInstance.post("youtube/playlist", playlist, { withCredentials: true })
+        const email = JSON.parse(localStorage.getItem("data")).email;
+        console.log(email);
+        const body = {
+            title: playlist.title.trim(),
+            url: playlist.url.trim(),
+            email
+        };
+        console.log(body);
+        axiosInstance.post("youtube/playlist", body, { withCredentials: true })
         .then((response) => {
             window.location.reload();
         })
@@ -74,7 +82,9 @@ export default function CourseList(){
     async function loadCourses(){
         // await dispatch(getAllCourses);
         // console.log(courseData);
-        const res = axiosInstance.get("youtube/playlist", { withCredentials: true });
+        const email = JSON.parse(localStorage.getItem("data")).email;
+        console.log(email);
+        const res = axiosInstance.get(`youtube/playlist/?email=${email}`, { withCredentials: true });
         toast.promise(res, {
             loading: "Loading",
             success: (await res).data.customCourse.length == 0 ? "No Course Found, Please add one" : "Courses Loaded",

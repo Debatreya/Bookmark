@@ -6,13 +6,13 @@ import { createPlaylists, deletePlaylist, getPlaylist, renamePlaylistTitle, mark
 const router = new Router();
 
 router.route('/playlist')
-    .post(isLoggedIn, createPlaylists)
-    .get(isLoggedIn, getPlaylist)
-    .patch(isLoggedIn, renamePlaylistTitle)
-    .delete(isLoggedIn, deletePlaylist)
+    .post( createPlaylists)
+    .get( getPlaylist)
+    .patch( renamePlaylistTitle)
+    .delete( deletePlaylist)
 
-router.patch('/playlist/video/progress', isLoggedIn, markProgress);
-router.get('/playlist/progress', isLoggedIn, getPlaylistProgress)
-router.get('/playlist/video/progress/', isLoggedIn, getVideoProgress)
+router.patch('/playlist/video/progress',  markProgress);
+router.get('/playlist/progress',  getPlaylistProgress)
+router.get('/playlist/video/progress/',  getVideoProgress)
 
 export default router;

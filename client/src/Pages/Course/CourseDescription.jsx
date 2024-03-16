@@ -10,8 +10,10 @@ import toast from "react-hot-toast";
 const VideoLabels = ({index, title, url, videoURL, completed, handleOnCLick, callGetProgress}) => {
     const [checked, setChecked] = useState();
     async function getVideoProgress(){
+        const email = JSON.parse(localStorage.getItem("data")).email;
+        console.log(email);
         try {
-            const response = await axiosInstance.get(`youtube/playlist/video/progress/?id=${url}&videoId=${videoURL}`, { withCredentials: true });
+            const response = await axiosInstance.get(`youtube/playlist/video/progress/?id=${url}&videoId=${videoURL}&email=${email}`, { withCredentials: true });
             console.log(response.data);
             completed = response.data.completed;
         } catch (error) {
@@ -20,8 +22,11 @@ const VideoLabels = ({index, title, url, videoURL, completed, handleOnCLick, cal
     }
     async function progressHandler(e){
         setChecked(e.target.checked);
+        const email = JSON.parse(localStorage.getItem("data")).email;
+        console.log(email);
         try{
             const body = {
+                email: email,
                 id : url,
                 videoId : videoURL
             }
@@ -109,8 +114,10 @@ export default function CourseDescription(){
     });
     const progressPercent = Math.round((progress.completed / progress.total) * 100)
     const getProgress = async () => {
+        const email = JSON.parse(localStorage.getItem("data")).email;
+        console.log(email);
         try {
-            const response = await axiosInstance.get(`youtube/playlist/progress/?id=${data.playlist_url}`)
+            const response = await axiosInstance.get(`youtube/playlist/progress/?id=${data.playlist_url}&email=${email}`)
             console.log(response.data);
             const {completed, total} = response.data;
             setProgress({ completed, total });
