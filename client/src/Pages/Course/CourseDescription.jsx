@@ -11,7 +11,7 @@ const VideoLabels = ({index, title, url, videoURL, completed, handleOnCLick, cal
     const [checked, setChecked] = useState();
     async function getVideoProgress(){
         try {
-            const response = await axiosInstance.get(`youtube/playlist/video/progress/?id=${url}&videoId=${videoURL}`);
+            const response = await axiosInstance.get(`youtube/playlist/video/progress/?id=${url}&videoId=${videoURL}`, { withCredentials: true });
             console.log(response.data);
             completed = response.data.completed;
         } catch (error) {
