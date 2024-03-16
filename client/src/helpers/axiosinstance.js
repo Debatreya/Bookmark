@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://bookmark-production-cf62.up.railway.app/api/v1"
+const BASE_URL = `${import.meta.env.VITE_SERVER}/api/v1`
 
 const axiosInstance = axios.create();
 
