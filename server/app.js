@@ -38,7 +38,7 @@ app.use('/api/v1/youtube', youtubeRoutes);
 
 // Other BAD Requests
 app.all('*', (req, res)=>{
-    res.status(404).send('OOPS!! 404 paege not found');
+    res.status(404).send('OOPS!! 404 page not found');
 })
 
 app.use(errorMiddleware);
