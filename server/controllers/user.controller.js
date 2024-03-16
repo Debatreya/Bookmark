@@ -8,7 +8,7 @@ import bcrypt from 'bcryptjs'
 
 const cookieOptions = {
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
+    httpOnly: false,
     secure: true
 }
 const register = async (req, res, next) => {
