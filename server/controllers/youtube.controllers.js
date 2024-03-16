@@ -4,7 +4,12 @@ import usetube from 'usetube'
 
 async function createPlaylists(req, res) {
     // const {email} = req.user;
+    console.log(req.body);
     const {email, url} = req.body;
+    if (!email || !url) {
+        console.log(email, url);
+        return res.status(400).json({ error: "Email and URL are required fields" });
+    }
     // Check if it is a video URL or a playlist URL
     if (url.includes('watch?v=')) {
         return createVideo(url, email, res);

@@ -4,27 +4,19 @@ import { FaTrashCan } from "react-icons/fa6";
 import toast from "react-hot-toast";
 
 
-export default function CourseCard({data}){
+export default function CourseCard({data, deleteCourse}){
     const navigate = useNavigate();
     const handleDelete = async (e) => {
         e.stopPropagation();
-        const email = JSON.parse(localStorage.getItem("data")).email;
-        console.log(email);
-        const res = axiosInstance.delete("youtube/playlist", { params: { url: data.playlist_url, email: email } }, { withCredentials: true });
-        toast.promise(res, {
-            loading: "Deleting...",
-            success: "Deleted Successfully",
-            error: "Failed to delete"
-        });
-        // I want to reload the page after deleting the course
-        window.location.reload();
+        deleteCourse(data)
     }
     return (
         <div 
             onClick={() => navigate("/course/description/", {state: {...data}})} 
             className="text-white w-[22rem] h-max shadow-lg rounded-lg cursor-pointer group overflow-hidden bg-zinc-700 p-2 border border-red-200 hover:scale-105 transition relative m-5">
             {/* <p className="w-[30px] h-[30px] absolute top-1 right-1 bg-black rounded-full flex justify-center items-center font-bold p-2 hover:scale-105 transition" onClick={handleDelete}>&#10060;</p> */}
-            <FaTrashCan className="w-[20px] h-[20px] absolute top-2 right-2 hover:rounded-full flex justify-center items-center p-1 hover:scale-150 hover:bg-red-500 transition" onClick={handleDelete} />
+            <FaTrashCan className="w-[20px] h-[20px] absolute top-2 right-2 hover:rounded-full flex justify-center items-center p-1 hover:scale-150 hover:bg-red-500 transition" 
+                onClick={handleDelete} />
             <div className="overflow-hidden">
                 <img 
                     className="h-48 w-full rounded-tl-lg rounded tr-lg group-hover: scale=[1,2] transition-all ease-in-out duration-300"
