@@ -136,20 +136,20 @@ export default function CourseDescription(){
                     {progressPercent ? progressPercent : 0}%
                 </span>
             </h1>
-            <main className="flex h-[80svh] gap-3 relative">
+            <main className="flex lg:h-[80svh] gap-3 relative max-lg:flex-wrap">
                 <progress className="w-full h-[2svh] absolute top--2 customProgress" value={progress.completed} max={progress.total}></progress>
-                <div className="min-w-[65svw] min-h-full flex flex-col justify-center p-2 px-5 relative">
+                <div className="min-w-[65svw] min-h-full flex flex-col justify-center p-2 px-5 relative grow">
                     <GrPrevious
                         className="text-4xl text-yellow-500 cursor-pointer inline absolute hover:scale-110 transition-all ease-in-out duration-300 hover:text-emerald-500 bg-black rounded-full p-2"
                         onClick={() => navigator(-1)}
                     />
                     <VideoPlayer videoUrl={video.url} videoTitle={video.title} />
-                    <div className="flex justify-center gap-[50px]">
+                    <div className="flex justify-center gap-[50px] max-lg:mt-3">
                         <button className="bg-black px-2 rounded-md text-yellow-500 text-xl cursor-pointer" onClick={handlePrev}>Prev</button>
                         <button className="bg-black px-2 rounded-md text-yellow-500 text-xl cursor-pointer" onClick={handleNext}>Next</button>
                     </div>
                 </div>
-                <aside className="min-h-full grow px-2 overflow-auto border-l  border-lime-300">
+                <aside className="min-h-full grow px-2 lg:overflow-auto lg:border-l  border-lime-300">
                     {allVideos.map((v, index) => <VideoLabels key={index} index={index} title={v.video_title} url={data.playlist_url} completed={v.completed} videoURL={v.video_url} handleOnCLick={changeVideo} callGetProgress={getProgress} />)}
                 </aside>
             </main>

@@ -5,7 +5,7 @@ const VideoPlayer = ({ videoUrl, videoTitle }) => {
   const videoId = getYouTubeVideoId(videoUrl);
   return (
     <div className="max-w-full max-h-full inline-flex m-auto flex-col justify-center items-center gap-5">
-        <h1 className="text-2xl font-bold text-center text-yellow-500 inline">{videoTitle}</h1>
+        <h1 className="text-2xl font-bold text-center text-yellow-500 inline max-lg:mt-4">{videoTitle}</h1>
         <hr className="w-full bg-white"/>
         {videoId && <YouTube videoId={videoId} />}
     </div>
