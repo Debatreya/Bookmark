@@ -185,7 +185,7 @@ export default function CourseList() {
 				<div className="lg:h-[80vh] pt-5 flex justify-evenly items-center gap-5 text-white lg:overflow-hidden max-lg:flex-wrap relative">
 					<div
 						className="my-10 min-w-[70svw] flex flex-wrap justify-evenly gap-5 lg:h-[75vh] max-sm:overflow-y-scroll lg
-					:hover:overflow-y-scroll customScrollbar"
+					overflow-y-scroll customScrollbar"
 					>
 						{courseData?.map((ele) => {
 							return (
