@@ -6,9 +6,14 @@ import HomeLayout from "../../Layouts/HomeLayout";
 // import { getAllCourses } from "../../Redux/Slices/CourseSlice";
 import CourseCard from "../../components/CourseCard";
 import axiosInstance from "../../helpers/axiosinstance";
-import { FaYoutube } from "react-icons/fa";
+import { FaYoutube, FaTimesCircle, FaPlus } from "react-icons/fa";
 
 function GetCourse({ loadCourses }) {
+	const [show, setShow] = useState(false);
+	const handleShow = () => {
+		setShow(!show);
+	};
+	console.log(show);
 	const [playlist, setPlaylist] = useState({
 		title: "",
 		url: "",
@@ -22,6 +27,7 @@ function GetCourse({ loadCourses }) {
 	};
 	function createPlaylist(e) {
 		e.preventDefault();
+		handleShow()
 		console.log(playlist);
 		try {
 			const email = JSON.parse(localStorage.getItem("data")).email;
@@ -54,16 +60,33 @@ function GetCourse({ loadCourses }) {
 			};
 		}
 	}
+	// When Show is false
+	if (!show) {
+		return (
+			<div className="fixed flex w-max items-center bottom-[11svh] right-[11svh] z-20 p-2 rounded-l-full glass max-lg:rounded-r-full cursor-pointer max-sm:right-5 max-sm:bottom-5"
+				onClick={handleShow}
+			>
+				<span className=" bg-red-500 h-max rounded-full">{<FaPlus className="text-white font-semibold m-2 text-3xl" />}</span>
+				<span className="bg-yellow-500 text-black inline-flex rounded-md px-4 py-1 text-2xl font-bold max-sm:hidden ">
+					Add Playlist
+				</span>
+			</div>
+		);
+	}
+	// When Show is true
 	return (
-		<div className="m-5 flex flex-col gap-1 justify-center items-center shadow-md shadow-white p-5 max-w-[30svw] min-w-[25svw] min-h-[60svh] border border-yellow-600 rounded-lg">
-			<h1 className="text-2xl font-semibold my-4 text-center py-[5%]">
+		<div
+			className={`m-5 flex flex-col gap-1 justify-center items-center shadow-md shadow-white p-5 max-w-[425px] min-w-[25svw] rounded-lg fixed glass bottom-[50%] translate-y-[50%] cursor-pointer bg-gray-800 z-50`}
+		>
+			<FaTimesCircle className="text-red-500 text-2xl cursor-pointer absolute top-5 right-5" onClick={handleShow} />
+			<h1 className="text-2xl font-semibold my-2 mt-6 text-center py-[5%]">
 				<span className="bg-yellow-500 text-black inline-flex rounded-md px-4 py-1 font-bold">
 					Add Playlist
 				</span>
 				&nbsp; from <FaYoutube className="text-red-500 inline-flex text-5xl" />
 			</h1>
 			<input
-				className="mb-5 w-[95%] h-10 px-3 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
+				className="mb-5 w-[95%] h-10 px-3 rounded-md outline bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
 				type="text"
 				name="title"
 				id="playlist_title"
@@ -72,7 +95,7 @@ function GetCourse({ loadCourses }) {
 				placeholder="Playlist Title (eg. Web Development)"
 			/>
 			<input
-				className="mb-5 w-[95%] h-10 px-3 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
+				className="mb-5 w-[95%] h-10 px-3 rounded-md outline bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
 				type="url"
 				name="url"
 				id="playlist_url"
@@ -81,7 +104,7 @@ function GetCourse({ loadCourses }) {
 				placeholder="Playlist URL (eg. https://www.youtube.com/playlist?list=PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3)"
 			/>
 			<button
-				className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+				className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded glass"
 				onClick={createPlaylist}
 			>
 				CREATE
@@ -129,13 +152,13 @@ export default function CourseList() {
 				success: "Deleted Successfully",
 				error: "Failed to delete",
 			});
-            const response = await res;
+			const response = await res;
 		} catch (error) {
-            console.log(error);
-            toast.error("Failed to delete");
-        }finally{
-            await loadCourses();
-        }
+			console.log(error);
+			toast.error("Failed to delete");
+		} finally {
+			await loadCourses();
+		}
 	};
 	useEffect(() => {
 		//check isLoggedIn then load courses
@@ -152,15 +175,18 @@ export default function CourseList() {
 	return (
 		<>
 			<HomeLayout>
-				<h1 className="text-2xl font-semibold text-center max-h-[10vh]">
+				<h1 className="text-2xl px-16 font-semibold text-center max-h-[10vh] max-lg:text-left max-lg:mt-5">
 					Explore the &nbsp;
-					<span className="bg-yellow-500 text-black inline-flex rounded-md px-4 py-1 font-bold mt-5">
+					<span className="bg-yellow-500 text-black inline-flex rounded-md px-4 py-1 font-bold lg:mt-5">
 						Customized Courses
 					</span>
 					&nbsp; made by you
 				</h1>
-				<div className="h-[80vh] pt-5 flex justify-evenly items-center gap-5 text-white overflow-hidden">
-					<div className="my-10 min-w-[70svw] flex flex-wrap justify-evenly gap-5 h-[75vh] hover:overflow-y-scroll customScrollbar">
+				<div className="lg:h-[80vh] pt-5 flex justify-evenly items-center gap-5 text-white lg:overflow-hidden max-lg:flex-wrap relative">
+					<div
+						className="my-10 min-w-[70svw] flex flex-wrap justify-evenly gap-5 lg:h-[75vh] max-sm:overflow-y-scroll lg
+					:hover:overflow-y-scroll customScrollbar"
+					>
 						{courseData?.map((ele) => {
 							return (
 								<CourseCard

@@ -4,7 +4,7 @@
 
 body {
     margin: auto;
-    max-width: 1440px;
+    /* max-width: 1440px; */
     position: relative;
 }
 .customScrollbar::-webkit-scrollbar-track{
