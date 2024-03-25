@@ -23,27 +23,33 @@ const Profile = () => {
 					<div className="mb-4">
 						<h2 className="text-2xl font-bold text-blue-400">Profile</h2>
 					</div>
-					<div className="mb-4">
-						<span className=" bg-slate-800 px-2 mr-2 rounded-lg font-bold">Full Name: </span>
-						<span>{localUser.fullName}</span>
-					</div>
-					<div className="mb-4">
-						<span className="font-bold bg-slate-800 px-2 mr-2 rounded-lg ">Email: </span>
-						<span>{localUser.email}</span>
-					</div>
-					<div className="mb-4">
-						<span className="bg-slate-800 px-2 mr-2 rounded-lg font-bold">Role: </span>
-						<span>{localUser.role}</span>
-					</div>
 					{localUser.avatar.secure_url && (
 						<div>
 							<img
 								src={localUser.avatar.secure_url}
 								alt={localUser.fullName}
-								className="w-32 h-32 rounded-full mt-2"
+								className="w-32 h-32 rounded-full mt-2 mx-auto"
 							/>
 						</div>
 					)}
+					<div className="mb-4">
+						<span className=" bg-slate-800 px-2 mr-2 rounded-lg font-bold">
+							Full Name:{" "}
+						</span>
+						<span>{localUser.fullName}</span>
+					</div>
+					<div className="mb-4">
+						<span className="font-bold bg-slate-800 px-2 mr-2 rounded-lg ">
+							Email:{" "}
+						</span>
+						<span>{localUser.email}</span>
+					</div>
+					<div className="mb-4">
+						<span className="bg-slate-800 px-2 mr-2 rounded-lg font-bold">
+							Role:{" "}
+						</span>
+						<span>{localUser.role}</span>
+					</div>
 				</div>
 			</div>
 		</HomeLayout>
